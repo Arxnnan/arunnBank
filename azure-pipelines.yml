@@ -1,0 +1,26 @@
+# Pipeline Trigger on Main Branch
+trigger:
+- main
+
+# Use the latest Ubuntu image
+pool:
+  vmImage: 'ubuntu-latest'
+
+# Define pipeline steps
+steps:
+# Step 1: Install Node.js
+- task: UseNode@2
+  inputs:
+    version: '16.x'
+
+# Step 2: Install dependencies
+- script: npm install
+  displayName: 'Install Dependencies'
+
+# Step 3: Run the application script
+- script: npm start
+  displayName: 'Run Application'
+
+# Step 4: Run tests
+- script: npm test
+  displayName: 'Run Tests'
